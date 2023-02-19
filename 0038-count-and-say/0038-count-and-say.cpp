@@ -1,21 +1,20 @@
 class Solution {
 public:
-    string countAndSay(int n) {
-        if(n==1)
-            return "1";
-        string temp=countAndSay(n-1);
-        int i=0;
-        string str="";
-        while(i<temp.size()){
-            char ch=temp[i];
-            int count=0;
-            while(temp[i]==ch){
-                count++;
-                i++;
-            }
-            str+=to_string(count);
-            str+=ch;
+    string func(string s) {
+        string res = "";
+        auto itr = s.begin();
+        while(itr !=s.end()) {
+            char c = *itr; int num =0;
+            while(itr != s.end() and *itr == c) itr++, num++; 
+            res += to_string(num);
+            res.push_back(c);
         }
-        return str;
+        return res;
+    }
+    string countAndSay(int n) {
+        n--;
+        string res = "1";
+        while(n--) res = func(res);
+        return res;
     }
 };
