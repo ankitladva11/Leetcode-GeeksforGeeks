@@ -1,20 +1,33 @@
 class Solution {
 public:
-    string func(string s) {
-        string res = "";
-        auto itr = s.begin();
-        while(itr !=s.end()) {
-            char c = *itr; int num =0;
-            while(itr != s.end() and *itr == c) itr++, num++; 
-            res += to_string(num);
-            res.push_back(c);
-        }
-        return res;
-    }
     string countAndSay(int n) {
-        n--;
-        string res = "1";
-        while(n--) res = func(res);
-        return res;
-    }
+        
+
+        string s="1";
+        if(n==1) return s;
+        for(int i=1;i<n;i++){
+            //counting 
+            string temp="";
+            vector<pair<char,int>> v;
+            for(int j=0;j<s.size();j++){
+                char num=s[j];
+                // cout<<num<<endl;
+                int count=1;
+                while(s[j+1]==num and j<s.size()){
+                    j++;
+                    count++;
+                }
+                
+                v.push_back(make_pair(num,count));
+            }
+            for(auto it:v){
+                char num1=it.first;
+                int c=it.second;
+                temp+=to_string(c)+num1;
+            }
+            cout<<temp<<endl;
+            s=temp;
+        }
+        return s;
+    }
 };
